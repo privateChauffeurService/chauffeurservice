@@ -5,27 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chauffeur Service - Private Rides & Bookings</title>
   <style>
-    body {
+    /* Basic styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
-      margin: 0; padding: 0; background: #f9f9f9; color: #222;
+      color: #222;
+      position: relative;
+      overflow-x: hidden;
     }
+    /* Background slideshow container */
+    .bg-slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+    }
+    /* Each background image */
+    .bg-slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    /* Visible slide */
+    .bg-slide.active {
+      opacity: 0.50; /* 50% visibility */
+    }
+    /* Black overlay for darkening */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75); /* black 75% opacity */
+      z-index: -1;
+    }
+
+    /* Content container with max width and padding */
+    .content-wrapper {
+      position: relative;
+      max-width: 800px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
     header {
-      background: #111;
-      color: gold;
+      background: linear-gradient(180deg, 
+            #b8860b, /* dark goldenrod */
+            #ffd700 40%, /* bright gold */
+            #b8860b 70%);
+      color: black;
       padding: 20px;
       text-align: center;
+      border-radius: 0 0 8px 8px;
+      max-width: 800px;
+      margin: 30px auto 0 auto;
+      position: relative;
+      z-index: 1;
     }
     header h1 {
       margin: 0;
       font-size: 2rem;
-    }
-    section {
-      max-width: 800px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
       color: #111;
@@ -45,14 +97,11 @@
       border-collapse: collapse;
       padding: 8px 12px;
       text-align: left;
+      background: #fff;
     }
     .rates-table {
       width: 100%;
       margin-bottom: 20px;
-    }
-    .highlight {
-      color: gold;
-      font-weight: bold;
     }
     .highlight-black-caps {
       color: black;
@@ -61,116 +110,157 @@
       text-transform: uppercase;
     }
     footer {
-      background: #111;
+      background: rgba(0, 0, 0, 0.7);
       color: gold;
       text-align: center;
       padding: 15px 10px;
       margin-top: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+      z-index: 1;
+    }
+    /* Flashing Book Now button */
+    #bookNowBtn {
+      padding: 16px 36px;
+      font-size: 22px;
+      cursor: pointer;
+      border-radius: 6px;
+      background: gold;
+      border: none;
+      font-weight: bold;
+      animation: flash 1s infinite;
+      display: block;
+      margin: 40px auto;
+      max-width: 220px;
+      text-align: center;
+    }
+    @keyframes flash {
+      0% { background-color: gold; }
+      50% { background-color: #ffcc00; }
+      100% { background-color: gold; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Chauffeur Service</h1>
-</header>
-
-<section>
-  <h2>Contact</h2>
-  <p><strong>Call or Text:</strong> 773-961-5756</p>
-  <p><strong>Email:</strong> <a href="mailto:getyouachauffeur@gmail.com">getyouachauffeur@gmail.com</a></p>
-</section>
-
-<section>
-  <h2>Services</h2>
-  <ul>
-    <li><strong>Airport Transfers</strong><br>Reliable rides to and from all major airports.</li>
-    <li><strong>Point to Point</strong><br>Convenient direct trips anywhere you need.</li>
-    <li><strong>Hourly as Directed</strong><br>Flexible hourly booking for errands, events, or meetings.</li>
-    <li><strong>Corporate</strong><br>Professional transportation for business clients.</li>
-    <li><strong>Daily Campus Ride</strong><br>Safe, scheduled rides for students to school or college.</li>
-  </ul>
-  <p><strong>Vehicle:</strong> Black GMC Terrain, Mid-size SUV — clean, comfortable, and professionally maintained. Equipped with free Wi-Fi, phone charging ports, and complimentary bottled water for your convenience.</p>
-</section>
-
-<section>
-  <h2>Rates & Offers</h2>
-  <table class="rates-table">
-    <tr>
-      <th>Service</th>
-      <th>Rate</th>
-    </tr>
-    <tr>
-      <td>Minimum Fare</td>
-      <td>$99</td>
-    </tr>
-    <tr>
-      <td>Per Mile</td>
-      <td>$3.00</td>
-    </tr>
-    <tr>
-      <td>Per Minute</td>
-      <td>$0.50</td>
-    </tr>
-    <tr>
-      <td>Booking Fee</td>
-      <td>$75 (non-refundable)</td>
-    </tr>
-    <tr>
-      <td>Hourly Hire</td>
-      <td>$85/hour (2-hour minimum)</td>
-    </tr>
-  </table>
-  <p class="highlight-black-caps">25% LOWER RATE THAN LEADING RIDESHARE SERVICES.</p>
-  <p class="highlight-black-caps">40% SAVINGS ON ROUND TRIPS*<br>
-  <small style="color: gray; text-transform: none;">*Based on current market rates.</small></p>
-</section>
-
-<section>
-  <h2>Booking Form</h2>
-  <div style="display: flex; justify-content: center; margin: 40px 0;">
-    <button id="bookNowBtn" 
-            style="padding: 16px 36px; font-size: 22px; cursor: pointer; border-radius: 6px; background: gold; border: none; font-weight: bold;">
-      Book Now
-    </button>
+  <!-- Background slideshow -->
+  <div class="bg-slideshow">
+    <div class="bg-slide active" style="background-image: url('https://dealerinspire-image-library-prod.s3.us-east-1.amazonaws.com/images/td5qAx39192SJ2XHFpcURyAV7qIAlwvEtNo1BHq3.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.wired.it/wp-content/uploads/2014/08/1408703332_driver-hero-1-1440-900.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('https://gmauthority.com/blog/wp-content/uploads/2018/09/2019-GMC-Terrain-in-Medium-Ash-Gray-leather-interior-with-Jet-Black-Accents-H17.jpeg');"></div>
   </div>
-</section>
+  <!-- Black transparent overlay -->
+  <div class="bg-overlay"></div>
 
-<section>
-  <h2>Terms & Conditions</h2>
-  <p>
-    - A <strong>$75 non-refundable booking fee</strong> is required to confirm and secure your reservation.<br>
-    - Please provide at least <strong>24 hours’ notice</strong> for cancellations or changes. Late cancellations or no-shows may result in additional charges.<br>
-    - All fares are calculated based on the agreed rates; any applicable tolls, parking fees, or additional wait time will be charged separately.<br>
-    - Passengers must adhere to vehicle policies, including safety regulations and capacity limits.<br>
-    - The service provider reserves the right to refuse service for any unsafe or inappropriate behavior.<br>
-    - In case of unforeseen circumstances (e.g., vehicle breakdown or emergencies), reasonable efforts will be made to provide alternative transportation or reschedule.<br>
-    - <strong>Payment Methods:</strong> Cash, Zelle, and similar payment services are preferred. A surcharge applies to credit card transactions; please inquire for current rates.<br>
-    - <strong>Liability:</strong> We are not responsible for delays caused by traffic, weather, or other factors beyond our control.<br>
-    - <strong>Child Safety:</strong> Parents or guardians must provide appropriate child safety seats as required by law.<br>
-    - <strong>Health & Safety:</strong> We follow recommended health protocols to ensure passenger safety.
-  </p>
-  <h3>Privacy Notice</h3>
-  <p>
-    - We collect your personal information only to facilitate bookings and communications related to your rides.<br>
-    - Your information is securely stored and will not be shared, sold, or disclosed to any third parties without your consent, except as required by law.<br>
-    - By submitting this form, you agree to be contacted via phone, email, or text regarding your reservation and related services.<br>
-    - You may request access to, correction of, or deletion of your personal data by contacting us directly.
-  </p>
-</section>
+  <header>
+    <h1>Chauffeur Service</h1>
+  </header>
 
-<footer>
-  &copy; 2025 Chauffeur Service. All rights reserved.
-</footer>
+  <div class="content-wrapper">
 
-<script>
-  const bookNowBtn = document.getElementById('bookNowBtn');
+    <section>
+      <h2>Contact</h2>
+      <p><strong>Call or Text:</strong> 773-961-5756</p>
+      <p><strong>Email:</strong> <a href="mailto:getyouachauffeur@gmail.com">getyouachauffeur@gmail.com</a></p>
+    </section>
 
-  bookNowBtn.addEventListener('click', () => {
-    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScTptCcbZnB7Z_9pXpUVYLYqTnLDCgQ5OMwGB_kSAnykDe-8g/viewform?embedded=true";
-    window.open(formURL, '_blank'); // open in new tab
-  });
-</script>
+    <section>
+      <h2>Services</h2>
+      <ul>
+        <li><strong>Airport Transfers</strong><br>Reliable rides to and from all major airports.</li>
+        <li><strong>Point to Point</strong><br>Convenient direct trips anywhere you need.</li>
+        <li><strong>Hourly as Directed</strong><br>Flexible hourly booking for errands, events, or meetings.</li>
+        <li><strong>Corporate</strong><br>Professional transportation for business clients.</li>
+        <li><strong>Daily Campus Ride</strong><br>Safe, scheduled rides for students to school or college.</li>
+      </ul>
+      <p><strong>Vehicle:</strong> Black GMC Terrain, Mid-size SUV — clean, comfortable, and professionally maintained. Equipped with free Wi-Fi, phone charging ports, and complimentary bottled water for your convenience.</p>
+    </section>
+
+    <section>
+      <h2>Rates & Offers</h2>
+      <table class="rates-table">
+        <tr>
+          <th>Service</th>
+          <th>Rate</th>
+        </tr>
+        <tr>
+          <td>Minimum Fare</td>
+          <td>$99</td>
+        </tr>
+        <tr>
+          <td>Per Mile</td>
+          <td>$3.00</td>
+        </tr>
+        <tr>
+          <td>Per Minute</td>
+          <td>$0.50</td>
+        </tr>
+        <tr>
+          <td>Booking Fee</td>
+          <td>$75 (non-refundable)</td>
+        </tr>
+        <tr>
+          <td>Hourly Hire</td>
+          <td>$85/hour (2-hour minimum)</td>
+        </tr>
+      </table>
+      <p class="highlight-black-caps">25% LOWER RATE THAN LEADING RIDESHARE SERVICES.</p>
+      <p class="highlight-black-caps">40% SAVINGS ON ROUND TRIPS*<br>
+      <small style="color: gray; text-transform: none;">*Based on current market rates.</small></p>
+    </section>
+
+    <section>
+      <h2>Booking Form</h2>
+      <button id="bookNowBtn" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScTptCcbZnB7Z_9pXpUVYLYqTnLDCgQ5OMwGB_kSAnykDe-8g/viewform?embedded=true', '_blank')">
+        Book Now
+      </button>
+    </section>
+
+    <section>
+      <h2>Terms & Conditions</h2>
+      <p>
+        - A <strong>$75 non-refundable booking fee</strong> is required to confirm and secure your reservation.<br>
+        - Please provide at least <strong>24 hours’ notice</strong> for cancellations or changes. Late cancellations or no-shows may result in additional charges.<br>
+        - All fares are calculated based on the agreed rates; any applicable tolls, parking fees, or additional wait time will be charged separately.<br>
+        - Passengers must adhere to vehicle policies, including safety regulations and capacity limits.<br>
+        - The service provider reserves the right to refuse service for any unsafe or inappropriate behavior.<br>
+        - In case of unforeseen circumstances (e.g., vehicle breakdown or emergencies), reasonable efforts will be made to provide alternative transportation or reschedule.<br>
+        - <strong>Payment Methods:</strong> Cash, Zelle, and similar payment services are preferred. A surcharge applies to credit card transactions; please inquire for current rates.<br>
+        - <strong>Liability:</strong> We are not responsible for delays caused by traffic, weather, or other factors beyond our control.<br>
+        - <strong>Child Safety:</strong> Parents or guardians must provide appropriate child safety seats as required by law.<br>
+        - <strong>Health & Safety:</strong> We follow recommended health protocols to ensure passenger safety.
+      </p>
+      <h3>Privacy Notice</h3>
+      <p>
+        - We collect your personal information only to facilitate bookings and communications related to your rides.<br>
+        - Your information is securely stored and will not be shared, sold, or disclosed to any third parties without your consent, except as required by law.<br>
+        - By submitting this form, you agree to be contacted via phone, email, or text regarding your reservation and related services.<br>
+        - You may request access to, correction of, or deletion of your personal data by contacting us directly.
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Chauffeur Service. All rights reserved.
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.bg-slide');
+    let current = 0;
+    const slideCount = slides.length;
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slideCount;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, 4000); // change every 4 seconds
+  </script>
 
 </body>
 </html>
