@@ -67,12 +67,6 @@
       padding: 15px 10px;
       margin-top: 30px;
     }
-    iframe {
-      width: 100%;
-      height: 900px;
-      border: none;
-      border-radius: 8px;
-    }
   </style>
 </head>
 <body>
@@ -134,7 +128,13 @@
 
 <section>
   <h2>Booking Form</h2>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScTptCcbZnB7Z_9pXpUVYLYqTnLDCgQ5OMwGB_kSAnykDe-8g/viewform?embedded=true" width="640" height="2216" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></section>
+  <div style="display: flex; justify-content: center; margin: 40px 0;">
+    <button id="bookNowBtn" 
+            style="padding: 16px 36px; font-size: 22px; cursor: pointer; border-radius: 6px; background: gold; border: none; font-weight: bold;">
+      Book Now
+    </button>
+  </div>
+</section>
 
 <section>
   <h2>Terms & Conditions</h2>
@@ -163,6 +163,14 @@
   &copy; 2025 Chauffeur Service. All rights reserved.
 </footer>
 
+<script>
+  const bookNowBtn = document.getElementById('bookNowBtn');
+
+  bookNowBtn.addEventListener('click', () => {
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScTptCcbZnB7Z_9pXpUVYLYqTnLDCgQ5OMwGB_kSAnykDe-8g/viewform?embedded=true";
+    window.open(formURL, '_blank'); // open in new tab
+  });
+</script>
+
 </body>
 </html>
-
